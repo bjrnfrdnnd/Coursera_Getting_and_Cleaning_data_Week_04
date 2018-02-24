@@ -107,10 +107,10 @@ if (1){
 
 ## merge the training and test data in one total data set
 if (1){
-    data_all <- rbind(train_data, test_data);
+    df_data_all <- rbind(train_data, test_data);
 }
 
-## mutate the data_all dataframe to contain a column with descriptive values
+## mutate the df_data_all dataframe to contain a column with descriptive values
 if (1){
     # read the table that links activity labels to activity 
     base_FN <- "activity_labels.txt";
@@ -120,14 +120,14 @@ if (1){
     df_activities <- read_delim(FN,delim=delim,col_names=col_names);
     
     # replace the column with the activity_ids with a column containing the activity_labels
-    data_all_activity_labels <- data_all %>% 
+    df_data_all_activity_labels <- df_data_all %>% 
         left_join(df_activities) %>%
         select(-activity_id)
 }
 
 # generate more appropriate variable names
 if (1){
-    a <- names(data_all_activity_labels);
+    a <- names(df_data_all_activity_labels);
     a <- gsub("^t(.*)","temporal\\1",a);
     a <- gsub("^f(.*)","frequency\\1",a);
     # the BodyBody string seems to be an error in the feature list
@@ -149,27 +149,27 @@ if (1){
     )
     
     # replace the names of the dataframe with the vector with more appropriate names
-    names(data_all_activity_labels) <- a;
+    names(df_data_all_activity_labels) <- a;
 }
 
 # apply a better ordering of columns
 if (1){
-    df1 <- data_all_activity_labels %>% select(c(kind,subject_id,activity_label));
-    df2 <- data_all_activity_labels %>% select(-c(kind,subject_id,activity_label));
-    data_all_activity_labels <- cbind(df1,df2);
+    df1 <- df_data_all_activity_labels %>% select(c(kind,subject_id,activity_label));
+    df2 <- df_data_all_activity_labels %>% select(-c(kind,subject_id,activity_label));
+    df_data_all_activity_labels <- cbind(df1,df2);
 }
 
 # create a table with the mean of all variables for each subject and activity
 if (1){
-    data_all_tabled_average <- data_all_activity_labels %>% 
+    df_data_all_tabled_average <- df_data_all_activity_labels %>% 
     select(-kind) %>% 
     group_by(subject_id, activity_label) %>% 
     summarize_all(.funs=mean);
-    a <- names(data_all_tabled_average);
+    a <- names(df_data_all_tabled_average);
     b <- sapply(a[3:length(a)],function(x){paste(x,"average",sep="_")});
-    names(data_all_tabled_average)[3:length(a)] <- b;
+    names(df_df_data_all_tabled_average)[3:length(a)] <- b;
     # order the rows
-    data_all_tabled_average <- data_all_tabled_average %>%
+    df_data_all_tabled_average <- df_data_all_tabled_average %>%
         arrange(subject_id,activity_label);
 }
 
@@ -178,6 +178,6 @@ if (1){
 # here, one table will have accelerations
 # the other, activity labels
 if (1){
-    df_accelerations <- data_all_activity_labels %>% select(-activity_label)
-    df_activitykinds <- data_all_activity_labels %>% select(kind, subject_id, activity_label)
+    df_accelerations <- df_data_all_activity_labels %>% select(-activity_label)
+    df_activitykinds <- df_data_all_activity_labels %>% select(kind, subject_id, activity_label)
 }
