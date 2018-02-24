@@ -29,5 +29,5 @@ The observation time is encoded by the row number. Each row (within a subject_id
 
 1. point 1
 1. point 2
-  1. point 2.1
-  1. point 2.2
+    1. point 2.1
+    1. point 2.2
