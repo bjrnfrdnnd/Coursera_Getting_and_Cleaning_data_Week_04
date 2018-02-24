@@ -167,7 +167,7 @@ if (1){
     summarize_all(.funs=mean);
     a <- names(df_data_all_tabled_average);
     b <- sapply(a[3:length(a)],function(x){paste(x,"average",sep="_")});
-    names(df_df_data_all_tabled_average)[3:length(a)] <- b;
+    names(df_data_all_tabled_average)[3:length(a)] <- b;
     # order the rows
     df_data_all_tabled_average <- df_data_all_tabled_average %>%
         arrange(subject_id,activity_label);

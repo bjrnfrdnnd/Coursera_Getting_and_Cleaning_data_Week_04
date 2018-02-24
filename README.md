@@ -25,7 +25,7 @@ For this task, we wrote an [R script](run_analysis.R) that performs the followin
 The observation time is encoded by the row number. Each row (within a subject_id) corresponds to a timeframe defined by the row number. Reordering of rows in only one of the produced dataframes ([acceleration dataframe](df_accelerations) or  [activity dataframe](df_activitykinds)) will therefore result in a wrong attribution of activity labels to accelerations. If one wishes to rearrange rows, the same reordering has to be applied to both dataframes.
 
 ## Remarks
-The original task list given by the instructors contains 4 points. The task list says to create an R script that:
+The original task list given by the instructors contains 5 points. The task list says to create an R script that:
   1. <a id="T-1"></a>Merges the training and the test sets to create one data set.
   2. <a id="T-2"></a>Extracts only the measurements on the mean and standard deviation for each measurement.
   3. <a id="T-3"></a>Uses descriptive activity names to name the activities in the data set
