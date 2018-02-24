@@ -26,3 +26,8 @@ For this task, we wrote an [R script](run_analysis.R) that performs the followin
 The data in each sub-dataframe contains information about the subject identifier and the data kind (train or test).
 
 The observation time is encoded by the row number. Each row (within a subject_id) corresponds to a timeframe defined by the row number. Reordering of rows in only one of the produced dataframes ([acceleration dataframe](df_accelerations) or  [activity dataframe](df_activitykinds)) will therefore result in a wrong attribution of activity labels to accelerations. If one wishes to rearrange rows, the same reordering has to be applied to both dataframes.
+
+1. point 1
+1. point 2
+  1. point 2.1
+  1. point 2.2
