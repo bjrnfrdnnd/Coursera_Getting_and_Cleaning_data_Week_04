@@ -181,3 +181,11 @@ if (1){
     df_accelerations <- df_data_all_activity_labels %>% select(-activity_label)
     df_activitykinds <- df_data_all_activity_labels %>% select(kind, subject_id, activity_label)
 }
+
+# save the objects to which we wish to refer
+if (1){
+    save(df_accelerations,file="df_accelerations.Rda");
+    save(df_activitykinds,file="df_activitykinds.Rda");
+    save(df_data_all_activity_labels,file = "df_data_all_activity_labels.Rda");
+    save(df_data_all_tabled_average,file = "df_data_all_tabled_average.Rda")
+}
