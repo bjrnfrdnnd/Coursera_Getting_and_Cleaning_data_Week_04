@@ -19,12 +19,9 @@ For this task, we wrote an [R script](run_analysis.R) that performs the followin
   1. Changes the activity identifiers to activity labels that are found in a [datafile](UCI HAR Dataset/activity_labels.txt) in the unzipped data
   1. Renames the individual, selected acceration measurements to more appropriate titles
   1. Creates a [dataframe](data_all_tabled_average) that contains the averages of each measurement for all subjects and activities for the entire dataset (including train and test data)
-  1. According to tidy data, each table should only contain one category of variables. We therefore split the main [dataframe](data_all_activity_labels) created in step (8.) into two dataframes:
-
+  1. According to tidy data, each table should only contain one category of variables. We therefore split the main [dataframe](data_all_activity_labels) created in step (8.) into two dataframes. The data in each sub-dataframe contains information about the subject identifier and the data kind (train or test):
       1. An [acceleration dataframe](df_accelerations) that contains only acceleration measurements
       1. An [activity dataframe](df_activitykinds) that contains only observations about the activity that was being performed by the subjects
-
-  <p></p>The data in each sub-dataframe contains information about the subject identifier and the data kind (train or test).
 
 The observation time is encoded by the row number. Each row (within a subject_id) corresponds to a timeframe defined by the row number. Reordering of rows in only one of the produced dataframes ([acceleration dataframe](df_accelerations) or  [activity dataframe](df_activitykinds)) will therefore result in a wrong attribution of activity labels to accelerations. If one wishes to rearrange rows, the same reordering has to be applied to both dataframes.
 
