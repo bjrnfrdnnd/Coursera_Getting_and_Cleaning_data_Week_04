@@ -7,7 +7,7 @@ require(dplyr)
 if (1){
     URL <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip"
     zip_FN <- "UCI_HAR_DATASET.zip";
-    download.file(url=URL,destfile = zip_FN)
+    download.file(url=URL,destfile = zip_FN);
 }
 
 ## unzip the file contents
@@ -15,6 +15,10 @@ if (1){
     unzip(zipfile = zip_FN);
     data_dir <- unzip (zip_FN,list=T)$Name[1];
     data_dir <- substr(data_dir,1,nchar(data_dir)-1);
+    data_dir_new <- gsub(" ","_",data_dir);
+    file.rename(data_dir, data_dir_new);
+    data_dir <- data_dir_new;
+    
 }
 
 ## Read the names of the features
