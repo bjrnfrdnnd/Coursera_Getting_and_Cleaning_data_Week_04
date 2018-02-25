@@ -47,7 +47,7 @@ The [main R script](run_analysis.R) merges the two dataframes produced by ```rea
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
 |feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages for each subject and each activity type has the following structure (step [I.8](I-8)):
+The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" containing the averages for each subject and each activity type has the following structure (step [I.8](I-8)):
 
 |column name | column type | column content|
 | --- | --- | --- |
@@ -55,7 +55,7 @@ The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages 
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
 |feature containing either "std()" or "mean()"|num| the average of the acceleration mean or acceleration standard deviation for this subject and this activity|
 
-The [acceleration dataframe](df_accelerations.Rda) has the following structure ((step [I.9.1](I-9-1))):
+The [acceleration dataframe](df_accelerations.Rda) called "df_accelerations" has the following structure ((step [I.9.1](I-9-1))):
 
 |column name | column type | column content|
 | --- | --- | --- |
@@ -63,7 +63,7 @@ The [acceleration dataframe](df_accelerations.Rda) has the following structure (
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-The [activity dataframe](df_activity.Rda) has the following structure ((step [I.9.2](I-9-2))):
+The [activity dataframe](df_activity.Rda) called "df_activity" has the following structure ((step [I.9.2](I-9-2))):
 
 |column name | column type | column content|
 | --- | --- | --- |
