@@ -28,7 +28,6 @@ The observation time is encoded by the row number. Each row (within a subject_id
 You can clone this repository, which will automatically download all the data and scripts necessary to perform the calculations. In the cloned Repo, you can then run the main [R script](run_analysis.R). This will again download the data and then perform all the steps detailed in [Implementation](#implementation). In order to focus on sub-parts of the analysis, you can choose to only execute parts of the code given in [R script](run_analysis.R): all of the code blocks are enclosed in conditionals that allow the user to execute only parts of the code. You have to edit the source code in [R script](run_analysis.R) though.
 
 ## Remarks
-### Correspondence between the detailed tasks given in the instructions and the list items given in [Implementation](#implementation)
 The original task list given by the instructors contains 5 points. The task list says to create an R script that:
   1. <a id="T-1"></a>Merges the training and the test sets to create one data set.
   2. <a id="T-2"></a>Extracts only the measurements on the mean and standard deviation for each measurement.
