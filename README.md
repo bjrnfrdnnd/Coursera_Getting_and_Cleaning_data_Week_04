@@ -3,7 +3,7 @@
 ## Introduction
 This is the programming assignment of week 4 of the coursera course "Getting and cleaning data".
 
-The task is to take some data and prepare it into tidy data specified by the instructors.
+The task is to take some data and convert it into tidy data as specified by the instructors.
 
 The data to be used for the task is accelerometer data from the Samsung Galaxy S smartphone available [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
 
