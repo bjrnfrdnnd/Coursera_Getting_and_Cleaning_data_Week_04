@@ -54,7 +54,7 @@ The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabl
 | --- | --- | --- |
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
-| "tasktemporal_Body_Acceleration_mean_X_average" | "temporal_Body_Acceleration_mean_X" for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1] |                      
+| "tasktemporal_Body_Acceleration_mean_X_average" | num | the average of "temporal_Body_Acceleration_mean_X" for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1] |                      
 | "temporal_Body_Acceleration_mean_Y_average" | num | the average of "temporal_Body_Acceleration_mean_Y" for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1] |                       
 | "temporal_Body_Acceleration_mean_Z_average" | num | the average of "temporal_Body_Acceleration_mean_Z" for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1] |                       
 | "temporal_Body_Acceleration_std_X_average" | num | the average of "temporal_Body_Acceleration_std_X" for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1] |                              
