@@ -7,7 +7,7 @@ for the programming assignment of week 4 of the coursera course "Getting and cle
 We will explain the data used, the processing steps and the R scripts involved, and the dataframes produced (We only produced dataframe objects, objects of other class only served temporary intermediate purposes).
 
 ## Process
-As outlined in the [Implementation](README.md#implementation) Part of the [readme](README.md), the [R script](run_analysis.R) performs 9 tasks. We will detail the steps and the data involved in the following. [UCI HAR Dataset](UCI HAR Dataset)
+As outlined in the [Implementation](README.md#implementation) Part of the [readme](README.md), the [R script](run_analysis.R) performs 9 tasks. We will detail the steps and the data involved in the following. [UCI HAR Dataset](run_analysis.R)
 
   1. <a id="I-1"></a> The script simply downloads the zip file containing the data into the current working directory.
   1. <a id="I-2"></a> The script ynzips the data, creating a subdirectory called [UCI HAR Dataset](UCI HAR Dataset) [UCI HAR Dataset](UCI HAR Dataset).
