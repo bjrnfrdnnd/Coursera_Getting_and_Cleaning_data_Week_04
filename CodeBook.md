@@ -23,13 +23,13 @@ As outlined in the [Implementation](README.md#implementation) Part of the [readm
 
   1. <a id="I-7"></a>The script renames the selected acceleration measurement names to more appropriate names. To do this, the script simply parses the names of the columns with several calls to ```gsub``` exchanging shorthand notation like "Acc" for "Acceleration", adding underscores to separate components, and eliminating "()" from the names. It also seems that there is an error in some column names: The [file with the feature names](UCI_HAR_Dataset/features.txt) lists several features containing the string "BodyBody". We believe this is an error and the substring should read "Body". Therefore, in addition to the other calls to ```gsub```, we also replace "BodyBody" with "Body".
 
-  1. <a id="I-8"></a>The script creates a [dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" that contains the averages of each measurement for all subjects and activities for the entire dataset (no separation between "train" and "test" data - all data from the combined dataframe is being taken into account). To create this aggregation, a combination of ```group_by``` and ```summarize_all``` is being used.
+  1. <a id="I-8"></a>The script creates a [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" that contains the averages of each measurement for all subjects and activities for the entire dataset (no separation between "train" and "test" data - all data from the combined dataframe is being taken into account). To create this aggregation, a combination of ```group_by``` and ```summarize_all``` is being used.
 
-  1. <a id="I-9"></a>According to tidy data, each table should only contain one category of variables. We therefore split the main [dataframe](df_data_all_activity_labels.Rda) created in step (8.) into two dataframes. The data in each sub-dataframe contains information about the subject identifier and the data kind (train or test):
+  1. <a id="I-9"></a> The script splits the [main dataframe](df_data_all_activity_labels.Rda) into two distinct dataframes: one containing only acceleration measurements, one containing only activity observations. This split is done following the concept of tidy data, where each table should only contain one category of variables (here: one table with acceleration variables, one table with activity observations). In addition to the information about acceleration resp. activity, each of the two produced dataframes contains information about the subject identifier and the data kind (train or test) to be able to easily subset the data. The two produced dataframes are:
       1. <a id="I-9-1"></a>An [acceleration dataframe](df_accelerations.Rda) that contains only acceleration measurements
-      1. <a id="I-9-1"></a>An [activity dataframe](df_activitykinds.Rda) that contains only observations about the activity that was being performed by the subjects
+      1. <a id="I-9-2"></a>An [activity dataframe](df_activitykinds.Rda) that contains only observations about the activity that was being performed by the subjects
 
-To summarize, the ```read_data_selected_columns``` custom function returns a dataframe with the following specification:
+To summarize, the ```read_data_selected_columns``` custom function returns a dataframe with the following specification (step [I.4](I-4)):
 
 |column name | column type | column content|
 | --- | --- | --- |
@@ -38,7 +38,7 @@ To summarize, the ```read_data_selected_columns``` custom function returns a dat
 |"activity_id"|int| an integer between 1 and 6 indicating the activity being performed in the corresponding row|
 |feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-The [main R script](run_analysis.R) merges the two dataframes produced by ```read_data_selected_columns```, exchanges the "activity_id" column for a "activity_label" column containing descriptive activity labels, renames the feature names according to [I.7](#I-7) and writes the result to the [combined dataframe](df_data_all_activity_labels.Rda) called "df_data_all_activity_labels". This [combined dataframe](df_data_all_activity_labels.Rda) has the following structure:
+The [main R script](run_analysis.R) merges the two dataframes produced by ```read_data_selected_columns```, exchanges the "activity_id" column for a "activity_label" column containing descriptive activity labels, renames the feature names according to [I.7](#I-7) and writes the result to the [combined dataframe](df_data_all_activity_labels.Rda) called "df_data_all_activity_labels". This [combined dataframe](df_data_all_activity_labels.Rda) has the following structure (step [I.7](I-7)):
 
 |column name | column type | column content|
 | --- | --- | --- |
@@ -47,7 +47,7 @@ The [main R script](run_analysis.R) merges the two dataframes produced by ```rea
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
 |feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages for each subject and each activity type has the following structure:
+The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages for each subject and each activity type has the following structure (step [I.8](I-8)):
 
 |column name | column type | column content|
 | --- | --- | --- |
@@ -55,39 +55,16 @@ The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages 
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
 |feature containing either "std()" or "mean()"|num| the average of the acceleration mean or acceleration standard deviation for this subject and this activity|
 
+The [acceleration dataframe](df_accelerations.Rda) has the following structure ((step [I.9.1](I-9-1))):
+|column name | column type | column content|
+| --- | --- | --- |
+|"kind"|chr|"train" or "test"|
+|"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
+|feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-## Installation and Usage
-You can clone this repository, which will automatically download all the data and scripts necessary to perform the calculations. In the cloned Repo, you can then run the main [R script](run_analysis.R). This will again download the data and then perform all the steps detailed in [Implementation](#implementation). In order to focus on sub-parts of the analysis, you can choose to only execute parts of the code given in [R script](run_analysis.R): all of the code blocks are enclosed in conditionals that allow the user to execute only parts of the code. You have to edit the source code in [R script](run_analysis.R) though.
-
-## Remarks
-The original task list given by the instructors contains 5 points. The task list says to create an R script that:
-  1. <a id="T-1"></a>Merges the training and the test sets to create one data set.
-  2. <a id="T-2"></a>Extracts only the measurements on the mean and standard deviation for each measurement.
-  3. <a id="T-3"></a>Uses descriptive activity names to name the activities in the data set
-  4. <a id="T-4"></a>Appropriately labels the data set with descriptive variable names.
-  5. <a id="T-5"></a>From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-
-We call these points [T.1](#T-1) to [T.5](#T-5). In the [Implementation](README.md#implementation) part we have listed 10 Points. We call these [I.1](#I-1) to [I.9](#I-9).
-
-  * Points [I.1](#I-1) and [I.2](#I-2) were added; they add the functionality of downloading the data directly.
-  * Point [I.3](#I-3) and [I.4](#I-4) concern the reading of selected features (mean and std) into dataframes. This corresponds to [T.2](#T-2) Note that these steps also add additional information. This task was not explicitly given in the instructor's list of tasks, but the added information is needed for further analysis (splitting into train and test data, subject information, prediction of activities).
-  * Point [I.5](#I-5) corresponds to [T.1](#T-1) We have inversed the order of Task [T.1](#T-1) and [T.2](#T-2) for 2 reasons:
-      1. Reading only selected features and then merging is faster and reguires less memory than reading all features, then merging, and then selecting
-      2. Some features can not be distinguished from others as they have the same feature name. This makes treatment using the names of columns more complicated (Though not impossible: workarounds exist, e.g. not using the names of columns but using the position of columns). The features we are interested in (mean and std features) are all unique, thus reading these selected features creates a dataframe with well-defined column names.
-
-  * Point [I.6](#I-6) corresponds to [T.3](#T-3)
-  * Point [I.7](#I-7) corresponds to [T.4](#T-4)
-  * Point [I.8](#I-8) corresponds to [T.5](#T-5)
-  * Point [I.9](#I-9) does not correspond to any specific task given by the instructors, but it does follow the principle of tidy data that stipulates that each data should only contain variables of the same category.
-
-In summary, we obtain the following table that links the implementation points [I.1](#I-1) to [I.9](#I-9) to the task points [T.1](#T-1) to [T.5](#T-5):
-
-| Implementation Points | Task Points | Short Description |
-| --------------------- | ----------- | --- |
-| [I.1](#I-1) and [I.2](#I-2) | #N/A |downloading of the data from the internet   |
-| [I.3](#I-3) and [I.4](#I-4) | [T.2](#T-2) | reading of selected features into R dataframes |
-| [I.5](#I-5) | [T.1](#T-1) | Merging of datasets |
-| [I.6](#I-6) | [T.3](#T-3) | Descriptive activity labels |
-| [I.7](#I-7) | [T.4](#T-4) | Appropriate variable names |
-| [I.8](#I-8) | [T.5](#T-5) | Creation of summary dataframe |
-| [I.9](#I-9) | #N/A | Splitting of main data into two datasets for each category of variable |
+The [activity dataframe](df_activity.Rda) has the following structure ((step [I.9.2](I-9-2))):
+|column name | column type | column content|
+| --- | --- | --- |
+|"kind"|chr|"train" or "test"|
+|"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
+|"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
