@@ -46,7 +46,7 @@ The [main R script](run_analysis.R) merges the two dataframes produced by ```rea
 |"kind"|chr|"train" or "test"|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
-|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature|
+|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature. Note that no units can be given as the data are normalized between in [-1,1]|
 
 The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" containing the averages for each subject and each activity type has the following structure (step [I.8](I-8)):
 
@@ -54,7 +54,7 @@ The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabl
 | --- | --- | --- |
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
-|feature containing either "_std" or "_mean"|num| the average of the normalized acceleration mean or normalized acceleration standard deviation for this subject and this activity|
+|feature containing either "_std" or "_mean"|num| the average of the normalized acceleration mean or normalized acceleration standard deviation for this subject and this activity. Note that no units can be given as the data are normalized between in [-1,1]|
 
 The [acceleration dataframe](df_accelerations.Rda) called "df_accelerations" has the following structure ((step [I.9.1](I-9-1))):
 
@@ -62,7 +62,7 @@ The [acceleration dataframe](df_accelerations.Rda) called "df_accelerations" has
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
-|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature|
+|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature. Note that no units can be given as the data are normalized between in [-1,1]|
 
 The [activity dataframe](df_activity.Rda) called "df_activity" has the following structure ((step [I.9.2](I-9-2))):
 
