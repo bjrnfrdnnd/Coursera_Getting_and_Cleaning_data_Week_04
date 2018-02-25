@@ -175,7 +175,7 @@ if (1){
     # order the rows
     df_data_all_tabled_average <- df_data_all_tabled_average %>%
         arrange(subject_id,activity_label);
-    df_data_all_tabled_average <- as.data.frame(df_data_all_activity_labels);
+    df_data_all_tabled_average <- as.data.frame(df_data_all_tabled_average);
 }
 
 # split the main dataset again into acceleration observations and activity observations
@@ -192,5 +192,8 @@ if (1){
     save(df_accelerations,file="df_accelerations.Rda");
     save(df_activitykinds,file="df_activitykinds.Rda");
     save(df_data_all_activity_labels,file = "df_data_all_activity_labels.Rda");
-    save(df_data_all_tabled_average,file = "df_data_all_tabled_average.Rda")
+    save(df_data_all_tabled_average,file = "df_data_all_tabled_average.Rda");
+    write.table(df_data_all_tabled_average, 
+                file = "df_data_all_tabled_average.txt", 
+                row.names=FALSE)
 }
