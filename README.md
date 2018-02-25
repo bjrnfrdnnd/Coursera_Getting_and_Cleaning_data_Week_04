@@ -7,6 +7,8 @@ The task is to take some data and convert it into tidy data as specified by the 
 
 The data to be used for the task is accelerometer data from the Samsung Galaxy S smartphone available [here](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).
 
+For a detailed specification of the process of tidying the data, the scripts being used, and the specification of the dataframes produced, please see [CodeBook.md](CodeBook.md).
+
 ## Implementation
 For this task, we wrote an [R script](run_analysis.R) that performs the following tasks:
 
@@ -36,7 +38,7 @@ The original task list given by the instructors contains 5 points. The task list
   4. <a id="T-4"></a>Appropriately labels the data set with descriptive variable names.
   5. <a id="T-5"></a>From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-We call these points [T.1](#T-1) to [T.5](#T-5). In the [Implementation](#implementation) part we have listed 10 Points. We call these [I.1](#I-1) to [I.9](#I-9).
+We call these points [T.1](#T-1) to [T.5](#T-5). In the [Implementation](#implementation) part we have listed 9 Points. We call these [I.1](#I-1) to [I.9](#I-9).
 
   * Points [I.1](#I-1) and [I.2](#I-2) were added; they add the functionality of downloading the data directly.
   * Point [I.3](#I-3) and [I.4](#I-4) concern the reading of selected features (mean and std) into dataframes. This corresponds to [T.2](#T-2) Note that these steps also add additional information. This task was not explicitly given in the instructor's list of tasks, but the added information is needed for further analysis (splitting into train and test data, subject information, prediction of activities).
