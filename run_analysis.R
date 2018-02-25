@@ -175,6 +175,7 @@ if (1){
     # order the rows
     df_data_all_tabled_average <- df_data_all_tabled_average %>%
         arrange(subject_id,activity_label);
+    df_data_all_tabled_average <- as.data.frame(df_data_all_activity_labels);
 }
 
 # split the main dataset again into acceleration observations and activity observations

@@ -23,7 +23,7 @@ As outlined in the [Implementation](README.md#implementation) Part of the [readm
 
   1. <a id="I-7"></a>The script renames the selected acceleration measurement names to more appropriate names. To do this, the script simply parses the names of the columns with several calls to ```gsub``` exchanging shorthand notation like "Acc" for "Acceleration", adding underscores to separate components, and eliminating "()" from the names. It also seems that there is an error in some column names: The [file with the feature names](UCI_HAR_Dataset/features.txt) lists several features containing the string "BodyBody". We believe this is an error and the substring should read "Body". Therefore, in addition to the other calls to ```gsub```, we also replace "BodyBody" with "Body".
 
-  1. <a id="I-8"></a>The script creates a [dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" that contains the averages of each measurement for all subjects and activities for the entire dataset (no separation between "train" and "test" data - all data from the combined dataframe is being taken into account).
+  1. <a id="I-8"></a>The script creates a [dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" that contains the averages of each measurement for all subjects and activities for the entire dataset (no separation between "train" and "test" data - all data from the combined dataframe is being taken into account). To create this aggregation, a combination of ```group_by``` and ```summarize_all``` is being used.
 
   1. <a id="I-9"></a>According to tidy data, each table should only contain one category of variables. We therefore split the main [dataframe](df_data_all_activity_labels.Rda) created in step (8.) into two dataframes. The data in each sub-dataframe contains information about the subject identifier and the data kind (train or test):
       1. <a id="I-9-1"></a>An [acceleration dataframe](df_accelerations.Rda) that contains only acceleration measurements
@@ -34,20 +34,27 @@ To summarize, the ```read_data_selected_columns``` custom function returns a dat
 |column name | column type | column content|
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
-|"activity_id"|int| an integer between 1 and 6 indicating the activity being performed in the corresponding row|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
-|feature containing either "std()" or "mean()"|num| the acceleration mean or standard deviation associated with that row and that feature|
+|"activity_id"|int| an integer between 1 and 6 indicating the activity being performed in the corresponding row|
+|feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-The [main R script](run_analysis.R) merges the two dataframes produced by ```read_data_selected_columns```, exchanges the "activity_id" column for a "activity_label" column containing descriptive activity labels, renames the feature names according to [I.3](#I-3) and writes the result to the [combined dataframe](df_data_all_activity_labels.Rda) called "df_data_all_activity_labels". This [combined dataframe](df_data_all_activity_labels.Rda) has the following structure:
+The [main R script](run_analysis.R) merges the two dataframes produced by ```read_data_selected_columns```, exchanges the "activity_id" column for a "activity_label" column containing descriptive activity labels, renames the feature names according to [I.7](#I-7) and writes the result to the [combined dataframe](df_data_all_activity_labels.Rda) called "df_data_all_activity_labels". This [combined dataframe](df_data_all_activity_labels.Rda) has the following structure:
 
 |column name | column type | column content|
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
-|"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
-|feature containing either "std()" or "mean()"|num| the acceleration mean or standard deviation associated with that row and that feature|
+|"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
+|feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
-      The observation time is encoded by the row number. Each row (within a subject_id) corresponds to a timeframe defined by the row number. Reordering of rows in only one of the produced dataframes ([acceleration dataframe](df_accelerations.Rda) or  [activity dataframe](df_activitykinds.Rda)) will therefore result in a wrong attribution of activity labels to accelerations. If one wishes to rearrange rows, the same reordering has to be applied to both dataframes.
+The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages for each subject and each activity type has the following structure:
+
+|column name | column type | column content|
+| --- | --- | --- |
+|"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
+|"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
+|feature containing either "std()" or "mean()"|num| the average of the acceleration mean or acceleration standard deviation for this subject and this activity|
+
 
 ## Installation and Usage
 You can clone this repository, which will automatically download all the data and scripts necessary to perform the calculations. In the cloned Repo, you can then run the main [R script](run_analysis.R). This will again download the data and then perform all the steps detailed in [Implementation](#implementation). In order to focus on sub-parts of the analysis, you can choose to only execute parts of the code given in [R script](run_analysis.R): all of the code blocks are enclosed in conditionals that allow the user to execute only parts of the code. You have to edit the source code in [R script](run_analysis.R) though.
