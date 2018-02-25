@@ -37,7 +37,7 @@ To summarize, the ```read_data_selected_columns``` custom function returns a dat
 |"kind"|chr|"train" or "test"|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_id"|int| an integer between 1 and 6 indicating the activity being performed in the corresponding row|
-|feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
+|feature containing either "std()" or "mean()"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature|
 
 The [main R script](run_analysis.R) merges the two dataframes produced by ```read_data_selected_columns```, exchanges the "activity_id" column for a "activity_label" column containing descriptive activity labels, renames the feature names according to [I.7](#I-7) and writes the result to the [combined dataframe](df_data_all_activity_labels.Rda) called "df_data_all_activity_labels". This [combined dataframe](df_data_all_activity_labels.Rda) has the following structure (step [I.7](I-7)):
 
@@ -46,7 +46,7 @@ The [main R script](run_analysis.R) merges the two dataframes produced by ```rea
 |"kind"|chr|"train" or "test"|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
-|feature containing either "_std" or "_mean"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
+|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature|
 
 The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabled_average" containing the averages for each subject and each activity type has the following structure (step [I.8](I-8)):
 
@@ -54,7 +54,7 @@ The [summary dataframe](df_data_all_tabled_average.Rda) called "df_data_all_tabl
 | --- | --- | --- |
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
 |"activity_label"|chr| a label that is one of the 6 possible activity types given in the [activity label datafile](UCI_HAR_Dataset/activity_labels.txt): WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING |
-|feature containing either "_std" or "_mean"|num| the average of the acceleration mean or acceleration standard deviation for this subject and this activity|
+|feature containing either "_std" or "_mean"|num| the average of the normalized acceleration mean or normalized acceleration standard deviation for this subject and this activity|
 
 The [acceleration dataframe](df_accelerations.Rda) called "df_accelerations" has the following structure ((step [I.9.1](I-9-1))):
 
@@ -62,7 +62,7 @@ The [acceleration dataframe](df_accelerations.Rda) called "df_accelerations" has
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
 |"subject_id"|int| an integer between 1 and 30 indicating the subject that was being measured in the corresponding row|
-|feature containing either "_std" or "_mean"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
+|feature containing either "_std" or "_mean"|num| the normalized acceleration mean or normalized acceleration standard deviation associated with that row and that feature|
 
 The [activity dataframe](df_activity.Rda) called "df_activity" has the following structure ((step [I.9.2](I-9-2))):
 
