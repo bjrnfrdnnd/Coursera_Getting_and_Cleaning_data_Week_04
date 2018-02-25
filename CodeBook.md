@@ -56,6 +56,7 @@ The [summary dataframe](df_data_all_tabled_average.Rda) containing the averages 
 |feature containing either "std()" or "mean()"|num| the average of the acceleration mean or acceleration standard deviation for this subject and this activity|
 
 The [acceleration dataframe](df_accelerations.Rda) has the following structure ((step [I.9.1](I-9-1))):
+
 |column name | column type | column content|
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
@@ -63,6 +64,7 @@ The [acceleration dataframe](df_accelerations.Rda) has the following structure (
 |feature containing either "std()" or "mean()"|num| the acceleration mean or acceleration standard deviation associated with that row and that feature|
 
 The [activity dataframe](df_activity.Rda) has the following structure ((step [I.9.2](I-9-2))):
+
 |column name | column type | column content|
 | --- | --- | --- |
 |"kind"|chr|"train" or "test"|
