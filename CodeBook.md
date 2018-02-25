@@ -7,13 +7,11 @@ for the programming assignment of week 4 of the coursera course "Getting and cle
 We will explain the data used, the processing steps and the R scripts involved, and the dataframes produced (We only produced dataframe objects, objects of other class only served temporary intermediate purposes).
 
 ## Process
-As outlined in the [readme](README.md), the script performs 9 tasks. [Implementation](#implementation)
+As outlined in the [Implementation](README,md#implementation) Part of the [readme](README.md), the [R script](run_analysis.R) performs 9 tasks. We will detail the steps and the data involved in the following.
 
-For this task, we wrote an [R script](run_analysis.R) that performs the following tasks:
-
-  1. <a id="I-1"></a> Downloads the accelerometer data from the website into the current directory
-  1. <a id="I-2"></a>Unzips the data, creating a subdirectory called [UCI HAR Dataset](UCI HAR Dataset)
-  1. <a id="I-3"></a>Analyses the feature list given in the dataset, and identifies the features that contain only the mean and standard deviation for each measurement
+  1. <a id="I-1"></a> The script simply downloads the zip file containing the data into the current working directory.
+  1. <a id="I-2"></a> The script ynzips the data, creating a subdirectory called [UCI HAR Dataset](UCI HAR Dataset).
+  1. <a id="I-3"></a> The script analyses the [feature list](UCI HAR Dataset/features.txt) given in the data, and identifies the features that contain only the mean and standard deviation for each measurement
   1. <a id="I-4"></a>Reads these selected features from the datafiles in the [UCI HAR Dataset](UCI HAR Dataset) subdirectory (both training and test data) into R dataframes and adds information about subject identifiers, activity identifiers, and data kind ("test" or "train") for each observation in these datasets. This is being done in a custom R function defined in an [R file](ProgrammingAssignmentFunctions.R) that is being sourced at the beginning of the main [R script](run_analysis.R).
   1. <a id="I-5"></a>Merges the datasets into a combined R dataset
   1. <a id="I-6"></a>Changes the activity identifiers to activity labels that are found in a [datafile](UCI HAR Dataset/activity_labels.txt) in the unzipped data
